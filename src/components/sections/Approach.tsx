@@ -32,23 +32,36 @@ export default function Approach() {
     <section id="approccio" className="bg-[#050505] py-40 px-8 md:px-24 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header con tono autoritario */}
-        <div className="mb-32">
-          <h2 className="text-gold font-mono text-xs uppercase tracking-[0.5em] mb-6 underline decoration-gold/30 underline-offset-8">
+        {/* Header Animato */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-32"
+        >
+          <h2 className="text-[#D4AF37] font-mono text-xs uppercase tracking-[0.5em] mb-6 underline decoration-[#D4AF37]/30 underline-offset-8">
             Methodology_v4.0
           </h2>
           <p className="text-white text-4xl md:text-6xl font-bold tracking-tighter leading-tight max-w-4xl">
             Il mio obiettivo è creare esperienze dove <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40 italic font-serif font-light">estetica e performance</span> non scendono a compromessi.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Grid delle Fasi */}
+        {/* Grid delle Fasi con Stagger Effect */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10">
-          {phases.map((phase) => (
-            <div key={phase.num} className="bg-[#050505] p-12 hover:bg-white/2 transition-all duration-500 group">
+          {phases.map((phase, index) => (
+            <motion.div 
+              key={phase.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-[#050505] p-12 hover:bg-white/2 transition-all duration-500 group"
+            >
               <div className="flex justify-between items-start mb-12">
-                <span className="text-gold font-mono text-4xl font-light opacity-50 group-hover:opacity-100 transition-opacity">
+                <span className="text-[#D4AF37] font-mono text-4xl font-light opacity-50 group-hover:opacity-100 transition-opacity">
                   {phase.num}
                 </span>
                 <div className="flex gap-2">
@@ -67,19 +80,25 @@ export default function Approach() {
               <p className="text-[#888] font-light leading-relaxed max-w-sm">
                 {phase.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Statement finale per la candidatura */}
-        <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+        {/* Statement finale */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-24 pt-12 border-t border-white/5 flex flex-col md:row justify-between items-center gap-8"
+        >
           <p className="text-white/40 font-mono text-[11px] uppercase tracking-[0.2em]">
             // Data-Driven Approach // User-Centric Logic
           </p>
           <div className="text-white font-light text-lg italic font-serif">
             "Trasformo brief complessi in prodotti digitali solidi."
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

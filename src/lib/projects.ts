@@ -1,3 +1,9 @@
+// 1. Importa le immagini come asset (Vite gestirà l'URL corretto per il deploy)
+import imgArredi from '../assets/projects/Arredi-italiani-browser-mockup.webp';
+import imgSoulfarm from '../assets/projects/Soulfarm-browser-mockup.webp';
+import imgFarmacia from '../assets/projects/Farmacia-santrovaso-browser-mockup.webp';
+import imgDevFest from '../assets/projects/devfest-app-mockup.webp';
+
 export interface Project {
   id: string;
   title: string;
@@ -6,7 +12,7 @@ export interface Project {
   tech: string[];
   description: string;
   performance: string;
-  image: string;
+  image: string; // Ora conterrà l'URL risolto da Vite
   link?: string;
   repo?: string;
   type: 'wordpress' | 'react' | 'healthcare' | 'mobile';
@@ -19,9 +25,9 @@ export const PROJECTS_DATA: Project[] = [
     role: "Senior Full-stack Designer",
     duration: "2024",
     tech: ["WordPress Custom", "Gutenberg", "SCSS"],
-    description: "Digital showroom per Arredi Italiani sviluppato con Emme Pubblicità e SWI. Trasformazione di un catalogo fisico in un'esperienza digitale immersiva con gestione editoriale tramite blocchi custom.",
+    description: "Digital showroom per Arredi Italiani sviluppato con Emme Pubblicità e SWI. Trasformazione di un catalogo fisico in un'esperienza digitale immersiva.",
     performance: "Lighthouse: 98/100",
-    image: "/projects/Arredi-italiani-browser-mockup.webp",
+    image: imgArredi, // Usiamo la variabile importata
     link: "https://arreditaliani.it",
     type: 'wordpress'
   },
@@ -31,9 +37,9 @@ export const PROJECTS_DATA: Project[] = [
     role: "Lead Frontend Developer",
     duration: "2024",
     tech: ["React 18", "TypeScript", "Vite", "Tailwind"],
-    description: "Re-engineering tecnico di un layout complesso in un'architettura a componenti. Focus sulla Type Safety, ottimizzazione del bundle e caricamento istantaneo.",
+    description: "Re-engineering tecnico di un layout complesso in un'architettura a componenti. Focus sulla Type Safety e caricamento istantaneo.",
     performance: "Load Time: < 0.8s",
-    image: "/projects/Soulfarm-browser-mockup.webp",
+    image: imgSoulfarm,
     link: "https://darkmindy.github.io/soulfarm-react/",
     repo: "https://github.com/darkmindy/soulfarm-react",
     type: 'react'
@@ -44,9 +50,9 @@ export const PROJECTS_DATA: Project[] = [
     role: "UI/UX Designer & Dev",
     duration: "2023",
     tech: ["WordPress Custom", "PHP", "SCSS"],
-    description: "Sviluppato con Emme Pubblicità e SWI. Un'interfaccia focalizzata su accessibilità e chiarezza informativa per i servizi farmaceutici territoriali.",
+    description: "Sviluppato con Emme Pubblicità e SWI. Un'interfaccia focalizzata su accessibilità e chiarezza informativa per i servizi farmaceutici.",
     performance: "A11Y: AA Compliant",
-    image: "/projects/Farmacia-santrovaso-browser-mockup.webp",
+    image: imgFarmacia,
     link: "https://www.farmaciasantrovaso.it/",
     type: 'healthcare'
   },
@@ -56,9 +62,9 @@ export const PROJECTS_DATA: Project[] = [
     role: "Flutter & UI Designer",
     duration: "2023",
     tech: ["Flutter", "Firebase", "Dart", "Pixel Art"],
-    description: "Un'app companion per eventi tech con sistema di gamification. Include una 'Passport Log' per collezionare timbri digitali, una sezione missioni con achievement progressivi e una mappa interattiva dell'evento, il tutto con un'estetica nostalgica GBC.",
+    description: "App companion con sistema di gamification. Include una 'Passport Log' per collezionare timbri digitali e una mappa interattiva con estetica GBC.",
     performance: "Gamified UX / Real-time Sync",
-    image: "/projects/devfest-app-mockup.webp", 
+    image: imgDevFest, 
     repo: "https://github.com/Darkmindy/devfestlog_passport",
     type: 'mobile'
   }
