@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 26 26 26; /* #1A1A1A in RGB */
+    --text-primary: 255 255 255;
+    --text-secondary: 192 192 192;
+    --accent-gold: 212 175 55; /* #D4AF37 */
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--text-secondary));
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Focus States A11Y corretti per Tailwind v4 */
+  *:focus-visible {
+    outline: 2px solid rgb(var(--accent-gold));
+    outline-offset: 4px;
+  }
+}
+
+/* Custom Utilities per mantenere lo stile pulito */
+@layer utilities {
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .text-gold {
+    color: rgb(var(--accent-gold));
+  }
+  
+  .bg-gold {
+    background-color: rgb(var(--accent-gold));
+  }
+  html {
+  scroll-behavior: smooth;
+}
+}
