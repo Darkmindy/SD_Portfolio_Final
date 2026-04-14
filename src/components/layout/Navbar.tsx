@@ -15,8 +15,8 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'About', href: '#about' },
-    { name: 'Archive', href: '#archive' },
-    { name: 'Contact', href: 'mailto:stefania.deliso@email.com' }, // Inserisci la tua mail
+    { name: 'Archive', href: '#selectedworks' },
+    { name: 'Contact', href: '#footer' }, 
   ];
 
   return (
