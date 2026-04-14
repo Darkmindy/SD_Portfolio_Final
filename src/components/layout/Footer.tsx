@@ -10,7 +10,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#030014] pt-32 pb-12 px-8 border-t border-white/10 overflow-hidden">
+    /* AGGIUNTO ID="FOOTER" QUI SOTTO */
+    <footer id="footer" className="relative bg-[#030014] pt-32 pb-12 px-8 border-t border-white/10 overflow-hidden scroll-mt-20">
       <div className="max-w-350 mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           
@@ -21,8 +22,8 @@ export default function Footer() {
             <div className="group relative inline-block">
               <a href="mailto:stefania.devgdi@gmail.com" className="text-2xl md:text-4xl text-white font-medium flex items-center gap-6 hover:text-blue-400 transition-all">
                 <EnvelopeSimpleIcon size={32} weight="thin" className="text-blue-500" />
-                stefania.devgdi@gmail.com
-                <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-500">
+                <span className="break-all md:break-normal">stefania.devgdi@gmail.com</span>
+                <div className="w-14 h-14 shrink-0 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-500">
                   <ArrowUpRightIcon size={24} weight="bold" />
                 </div>
               </a>
@@ -33,7 +34,7 @@ export default function Footer() {
             <p className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.4em] border-b border-white/5 pb-6">03_Network & Connectivity</p>
             <div className="space-y-4">
               {socials.map((social) => (
-                <a key={social.name} href={social.url} target="_blank" className="flex items-center justify-between p-5 rounded-2xl border border-white/5 hover:bg-white/3 transition-all group">
+                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-5 rounded-2xl border border-white/5 hover:bg-white/3 transition-all group">
                   <div className="flex items-center gap-4 text-white">
                     <span className="text-white/20 group-hover:text-blue-400 transition-colors">{social.icon}</span>
                     <span className="text-xs uppercase tracking-widest text-white/60">{social.name}</span>
