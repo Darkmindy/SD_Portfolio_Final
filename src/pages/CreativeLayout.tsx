@@ -25,7 +25,8 @@ interface BrandConfig {
   agencyName?: string;
   courtesyOf?: string;
   designPhilosophy: string;
-  aiInsight: string;     
+  aiInsight: string;
+  signatureNote?: string;
   externalLink?: string;
 }
 
@@ -40,6 +41,7 @@ export default function CreativeLayout({ project }: { project: Project }) {
       courtesyOf: "Animo Siciliano Social Archive",
       designPhilosophy: "Ho trasformato la tradizione in un'estetica da boutique digitale. L'uso della tipografia Bold ma ordinata e una gestione maniacale dello spazio bianco elevano il prodotto da semplice 'food' a icona editoriale.",
       aiInsight: "L'AI avrebbe saturato i contrasti; io ho scelto di far respirare i contenuti, creando una coerenza visiva che definisce il posizionamento Premium del brand.",
+      signatureNote: "Font puliti, gerarchie chiare, prodotti inseriti in composizioni che respirano: questa è la firma che riconosci su ogni progetto.",
       externalLink: "https://www.instagram.com/animosiciliano/"
     },
     'la-mariagnese': {
@@ -47,8 +49,9 @@ export default function CreativeLayout({ project }: { project: Project }) {
       tagline: "Sicilian legacy, contemporary aesthetics.",
       agencyName: "Emmè Web Agency",
       courtesyOf: "La Mariagnese Heritage Collection",
-      designPhilosophy: "Pulizia visiva e gerarchie chiare. Come nelle promozioni stagionali per GUESS, qui il prodotto respira in composizioni che rifiutano il caos a favore di un lusso moderno e ordinato.",
+      designPhilosophy: "Pulizia visiva e gerarchie chiare. Il prodotto respira in composizioni che rifiutano il caos a favore di un lusso moderno e ordinato. La tipografia bold è controllata, mai aggressiva — è una scelta di autorità, non di volume.",
       aiInsight: "L'occhio umano percepisce la tensione tra i bianchi; l'AI avrebbe solo riempito i vuoti, distruggendo l'aria Premium della composizione.",
+      signatureNote: "La coerenza visiva non è uniformità, è la somma di decisioni precise: margini, pesi tipografici, spazi. Ogni pixel bianco è una scelta consapevole.",
       externalLink: "https://www.instagram.com/lamariagnese/"
     },
     'arredi-italiani': {
@@ -57,25 +60,37 @@ export default function CreativeLayout({ project }: { project: Project }) {
       agencyName: "Emmè Web Agency + SWI Agency",
       courtesyOf: "Arredi Italiani S.r.l.",
       designPhilosophy: "Traduzione millimetrica da Figma a WordPress. La sfida è stata mantenere l'eleganza degli spazi bianchi e dei font sottili tipici del design d'arredo di lusso.",
-      aiInsight: "Un builder automatico avrebbe sporcato il codice; il mio sviluppo custom preserva la profondità del design originale.",
+      aiInsight: "Un template avrebbe standardizzato l'eleganza fino a renderla anonima. Ogni margine, ogni peso tipografico è stato calibrato a mano perché il lusso non tollera l'approssimazione — né nel legno, né nel pixel.",
+      signatureNote: "Nel design di lusso il bianco non è assenza di contenuto, ma spazio. La gestione dello spazio è il prodotto.",
     },
     'sano-siciliano': {
       accent: '#FFD700',
-      tagline: "Healthy Living, Digital Craftsmanship.",
+      tagline: "Eccellenza siciliana, estetica contemporanea.",
       agencyName: "Emmè Web Agency",
       courtesyOf: "Sano Siciliano",
       designPhilosophy: "Un design che respira, con ampi spazi bianchi e una tipografia leggera che riflette la freschezza e la naturalità del brand.",
       aiInsight: "L'AI avrebbe riempito ogni spazio; io ho scelto di valorizzare il vuoto, creando un'estetica che comunica salute e benessere.",
+      signatureNote: "La semplicità visiva è il risultato più difficile da ottenere,richiede più disciplina del massimalismo.",
       externalLink: "https://www.instagram.com/sanosiciliano/"
     },
     'mosca-mobili': {
-      accent: '#FFD700',
-      tagline: "Healthy Living, Digital Craftsmanship.",
+      accent: '#C9A96E',
+      tagline: "Artigianato italiano, esperienza digitale.",
       agencyName: "Emmè Web Agency + SWI Agency",
       courtesyOf: "Mosca Mobili",
-      designPhilosophy: "Un design che respira, con ampi spazi bianchi e una tipografia leggera che riflette la freschezza e la naturalità del brand.",
-      aiInsight: "L'AI avrebbe riempito ogni spazio; io ho scelto di valorizzare il vuoto, creando un'estetica che comunica salute e benessere.",
+      designPhilosophy: "Il legno ha una grammatica visiva propria: peso, calore, silenzio. Ho costruito il tema intorno a questi valori — tipografia serif sottile, spazi ariosi, animazioni che non disturbano ma accompagnano. Il sito non vende mobili: racconta come si vive uno spazio.",
+      aiInsight: "Un generatore automatico avrebbe scelto il beige sicuro e il layout a griglia. Io ho scelto le sovrapposizioni, le trasparenze, la tensione tra i pieni e i vuoti — perché l'artigianato non si comunica con l'ovvio.",
+      signatureNote: "Il ritmo visivo di una pagina si costruisce come una composizione musicale: pause, respiri, accenti. Lo spazio bianco è la pausa che dà valore alla nota.",
       externalLink: "https://www.instagram.com/moscamobili/"
+    },
+    'bonaccorso-brand': {
+      accent: '#C8A96E',
+      tagline: "Fashion advertising, editorial precision.",
+      agencyName: "Emmè Web Agency",
+      courtesyOf: "Bonaccorso Brand",
+      designPhilosophy: "Le grafiche per GUESS non comunicavano un prodotto: comunicavano un'aspirazione. Font puliti, gerarchie tipografiche chiare, composizioni in cui il prodotto respira. Un look editoriale da boutique digitale — bold ma ordinato, contemporaneo ma senza rumore.",
+      aiInsight: "In fashion advertising lo spazio bianco non è vuoto, è lusso. Ho gestito ogni margine con la stessa cura con cui un brand come GUESS gestisce la qualità dei materiali: non si taglia mai dove si vede.",
+      signatureNote: "Su ogni cliente — da GUESS a Animo Siciliano — il pattern è lo stesso: tipografia controllata, spazi che respirano, prodotti che acquisiscono un'aria Premium. Questa è la mia firma.",
     }
   };
 
@@ -231,14 +246,20 @@ export default function CreativeLayout({ project }: { project: Project }) {
       {/* Marchio Stefania_D (Sintesi) */}
       <section className="px-6 md:px-12 max-w-7xl mx-auto mt-40">
         <div className="border-y border-white/5 py-32 flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="max-w-xl">
-            <h2 className="text-[10px] font-mono uppercase tracking-[0.4em] opacity-40 mb-6 flex items-center gap-2">
+          <div className="max-w-xl space-y-6">
+            <h2 className="text-[10px] font-mono uppercase tracking-[0.4em] opacity-40 flex items-center gap-2">
                <CodeIcon size={14} /> Pattern_Analysis
             </h2>
             <p className="text-3xl md:text-5xl font-bold tracking-tighter uppercase leading-[0.9]">
               Il brand acquisisce un'identità <br />
               <span style={{ color: currentBrand.accent }}>Premium, Editoriale, Coerente.</span>
             </p>
+            {currentBrand.signatureNote && (
+              <p className="text-sm text-white/30 font-light leading-relaxed border-l-2 pl-5 italic"
+                style={{ borderColor: currentBrand.accent + '40' }}>
+                {currentBrand.signatureNote}
+              </p>
+            )}
           </div>
           <div className="text-8xl font-serif italic opacity-10 select-none">SD</div>
         </div>

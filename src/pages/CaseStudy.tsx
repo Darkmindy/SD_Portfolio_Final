@@ -16,36 +16,70 @@ import {
   GlobeIcon,
   DeviceMobileIcon,
   ImagesIcon,
-  ShieldCheckIcon
+  ShieldCheckIcon,
+  GithubLogoIcon
 } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 
 // IMPORT LOGHI
 import logoSoulfarm from '../assets/Loghi/LogoSoulfarm.webp';
 import logoDevFest from '../assets/Loghi/LogoDevFestCT.webp';
-import imgNational from '../assets/Loghi/Logo_national.webp'; 
+import imgNational from '../assets/Loghi/Logo_national.webp';
+import imgPortfolio from '../assets/projects/portfolio-meta.webp';
 
-//IMPORT VIDEO
+// IMPORT VIDEO — usato solo per devfest-passport
 import videoDevFest from '../assets/DevFestPassport/Registrazione_Passport_2025-11-11.mp4';
 
 export default function CaseStudy({ project }: { project: Project }) {
   const navigate = useNavigate();
 
-  const brandConfigs: Record<string, { accent: string; logo: string; figmaLink?: string; externalLink?: string; repo?: string }> = {
-    'soulfarm': { 
-      accent: '#A8E6CF', 
-      logo: logoSoulfarm, 
-      figmaLink: 'https://www.figma.com/design/Pxbg0hOMQz6U1Hi9nVUyYf/test-frontend?node-id=0-1&t=0TnjKSWS2bEQ03X7-1' 
+  const brandConfigs: Record<string, {
+    accent: string;
+    logo: string;
+    figmaLink?: string;
+    externalLink?: string;
+    repo?: string;
+    logicLabel?: string;
+    logicIntro?: string;
+    logicFeatures?: string[];
+    technicalQuote?: string;
+  }> = {
+    'soulfarm': {
+      accent: '#A8E6CF',
+      logo: logoSoulfarm,
+      figmaLink: 'https://www.figma.com/design/Pxbg0hOMQz6U1Hi9nVUyYf/test-frontend?node-id=0-1&t=0TnjKSWS2bEQ03X7-1',
+      logicLabel: 'Frontend Architecture',
+      logicIntro: "Replica pixel-perfect di un'interfaccia React esistente completata in 7 giorni: componenti atomici, TypeScript strict, zero dipendenze superflue.",
+      logicFeatures: ['Atomic Component Design', 'TypeScript Strict Mode', 'Vite HMR Optimization'],
+      technicalQuote: "Ogni componente è stato scritto per essere leggibile, tipizzato e scalabile — non solo per funzionare, ma per resistere nel tempo."
     },
-    'devfest-passport': { 
-      accent: '#4285F4', 
-      logo: logoDevFest, 
-      repo: "https://github.com/Darkmindy/devfestlog_passport"
+    'devfest-passport': {
+      accent: '#4285F4',
+      logo: logoDevFest,
+      repo: "https://github.com/Darkmindy/devfestlog_passport",
+      logicLabel: 'Mobile Architecture',
+      logicIntro: "Sviluppo cross-platform focalizzato sulla reattività dei dati e su un'interfaccia utente ad alta densità di asset grafici personalizzati.",
+      logicFeatures: ['Real-time Data Sync', 'Pixel-Perfect Scaling', 'Cross-Platform Optimization'],
+      technicalQuote: "Ogni linea di codice è stata scritta per massimizzare le performance su iOS e Android."
     },
     'national-automotive': {
-      accent: '#E30613', 
-      logo: imgNational, 
+      accent: '#E30613',
+      logo: imgNational,
       externalLink: "https://nationalautomotive.net/",
+      logicLabel: 'WP Custom Engineering',
+      logicIntro: "Ingegnerizzazione di un tema custom partendo dal codice sorgente, con card animate e micro-interazioni JS vanilla che eliminano la dipendenza da plugin pesanti.",
+      logicFeatures: ['Vanilla JS Interactions', 'DOM Performance Tuning', 'WP Engine Customization'],
+      technicalQuote: "Ogni interazione è scritta a mano: nessun plugin, nessuna scorciatoia — solo codice pulito che risponde al movimento dell'utente."
+    },
+    'portfolio-2024': {
+      accent: '#A78BFA',
+      logo: imgPortfolio,
+      externalLink: "https://darkmindy.github.io/SD_Portfolio_Final/",
+      repo: "https://github.com/darkmindy/SD_Portfolio_Final",
+      logicLabel: 'UI Engineering',
+      logicIntro: "Portfolio costruito come laboratorio di sperimentazione: Framer Motion per animazioni orchestrate, Tailwind per design atomico, filtraggio progetto via stato React senza ricaricamenti.",
+      logicFeatures: ['Framer Motion Orchestration', 'Atomic Design System', 'WCAG 2.1 AA Compliance'],
+      technicalQuote: "Non è solo una vetrina — è un manifesto. Ogni scelta tecnica è anche una scelta estetica."
     },
   };
 
@@ -54,6 +88,7 @@ export default function CaseStudy({ project }: { project: Project }) {
   const isMobile = project.type?.toLowerCase().includes('mobile');
   const isWP = project.tech.some(t => t.toLowerCase().includes('wordpress'));
   const isReact = project.tech.some(t => t.toLowerCase().includes('react') || t.toLowerCase().includes('vite'));
+  const isDevFest = project.id === 'devfest-passport';
 
   const getPlatformLabel = () => {
     if (isMobile) return 'Mobile_Application';
@@ -68,6 +103,11 @@ export default function CaseStudy({ project }: { project: Project }) {
     viewport: { once: true },
     transition: { duration: 0.6 }
   };
+
+  const logicLabel    = config.logicLabel    ?? (isMobile ? 'Mobile Architecture' : 'Logic Engineering');
+  const logicIntro    = config.logicIntro    ?? "Architettura moderna basata su componenti funzionali, con gestione dello stato ottimizzata per flussi dati complessi.";
+  const logicFeatures = config.logicFeatures ?? ['Vite HMR Optimization', 'Functional Component Pattern', 'Modular CSS Architecture'];
+  const technicalQuote = config.technicalQuote ?? `Ogni linea di codice è stata scritta per massimizzare le performance su ${isMobile ? 'iOS e Android' : 'browser moderni'}.`;
 
   return (
     <motion.main 
@@ -93,17 +133,42 @@ export default function CaseStudy({ project }: { project: Project }) {
               </span>
             ))}
           </div>
-          
-          {(config.figmaLink || config.externalLink || config.repo) && (
-            <a 
-              href={config.figmaLink || config.externalLink || config.repo} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-2 bg-blue-600 rounded-lg hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(37,99,235,0.4)]"
-            >
-              {config.figmaLink ? <FigmaLogoIcon size={18} weight="fill" /> : <GlobeIcon size={18} weight="bold" />}
-            </a>
-          )}
+
+          <div className="flex items-center gap-2">
+            {config.figmaLink && (
+              <a
+                href={config.figmaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-blue-600 rounded-lg hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                title="Figma"
+              >
+                <FigmaLogoIcon size={18} weight="fill" />
+              </a>
+            )}
+            {config.externalLink && (
+              <a
+                href={config.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+                title="Live Site"
+              >
+                <GlobeIcon size={18} weight="bold" />
+              </a>
+            )}
+            {config.repo && (
+              <a
+                href={config.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+                title="GitHub Repo"
+              >
+                <GithubLogoIcon size={18} weight="fill" />
+              </a>
+            )}
+          </div>
         </div>
       </nav>
 
@@ -154,7 +219,7 @@ export default function CaseStudy({ project }: { project: Project }) {
               </div>
               <div className="flex items-center gap-2">
                 {item.label === 'Status' && (
-                   <div className={`w-1.5 h-1.5 rounded-full ${item.val === 'In Progress' ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'}`} />
+                   <div className={`w-1.5 h-1.5 rounded-full ${item.val === 'In Progress' ? 'bg-yellow-500 animate-pulse' : item.val === 'Archived' ? 'bg-white/20' : 'bg-green-500'}`} />
                 )}
                 <p className="text-lg font-bold uppercase tracking-tight">{item.val}</p>
               </div>
@@ -171,24 +236,16 @@ export default function CaseStudy({ project }: { project: Project }) {
               <div className="flex items-center gap-4 text-blue-500">
                 <TreeStructureIcon size={32} weight="thin" />
                 <h2 className="text-2xl font-bold uppercase tracking-tighter">
-                  {isMobile ? 'Mobile Architecture' : 'Logic Engineering'}
+                  {logicLabel}
                 </h2>
               </div>
               <p className="text-white/50 leading-relaxed font-light text-lg italic">
-                {isMobile 
-                  ? "Sviluppo cross-platform focalizzato sulla reattività dei dati e su un'interfaccia utente ad alta densità di asset grafici personalizzati."
-                  : isWP 
-                  ? "Ingegnerizzazione di un tema custom partendo dal codice sorgente, eliminando il peso superfluo dei plugin per favorire script Vanilla JS performanti."
-                  : "Architettura moderna basata su componenti funzionali, con gestione dello stato ottimizzata per flussi dati complessi."
-                }
+                {logicIntro}
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-4">
-              {(isMobile ? ['Real-time Data Sync', 'Pixel-Perfect Scaling', 'Cross-Platform Optimization'] : 
-                isWP ? ['Vanilla JS Logic', 'DOM Performance', 'WP Engine Customization'] : 
-                ['Vite HMR Optimization', 'Functional Component Pattern', 'Modular CSS Architecture']
-              ).map((feat) => (
+              {logicFeatures.map((feat) => (
                 <div key={feat} className="flex items-center gap-4 p-4 border border-white/5 rounded-xl bg-white/2 hover:bg-white/5 transition-all group">
                   <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6] group-hover:scale-125 transition-transform" />
                   <span className="font-mono text-xs uppercase tracking-widest text-white/70">{feat}</span>
@@ -239,59 +296,61 @@ export default function CaseStudy({ project }: { project: Project }) {
         </div>
       </section>
 
-    {/* SECTION GALLERY CON VIDEO INTEGRALE */}
-{project.gallery && project.gallery.length > 0 && (
-  <section className="py-32 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto border-t border-white/5">
-    <motion.div {...fadeInUp} className="flex flex-col gap-2 mb-16">
-      <div className="flex items-center gap-4 text-blue-500">
-        <ImagesIcon size={32} weight="thin" />
-        <h2 className="text-2xl font-bold uppercase tracking-tighter italic text-white">Experience_Documentation</h2>
-      </div>
-      <p className="font-mono text-[9px] text-white/30 uppercase tracking-[0.4em] ml-12">UI interactions & Static Previews</p>
-    </motion.div>
+      {/* 05. GALLERY */}
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="py-32 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto border-t border-white/5">
+          <motion.div {...fadeInUp} className="flex flex-col gap-2 mb-16">
+            <div className="flex items-center gap-4 text-blue-500">
+              <ImagesIcon size={32} weight="thin" />
+              <h2 className="text-2xl font-bold uppercase tracking-tighter italic text-white">Experience_Documentation</h2>
+            </div>
+            <p className="font-mono text-[9px] text-white/30 uppercase tracking-[0.4em] ml-12">UI interactions & Static Previews</p>
+          </motion.div>
 
-    <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-      {/* VIDEO PREVIEW - Se presente, lo mettiamo come primo elemento per massimo impatto */}
-      <motion.div 
-        {...fadeInUp}
-        className="relative break-inside-avoid rounded-2xl overflow-hidden border border-blue-500/30 bg-blue-500/5 shadow-[0_0_30px_rgba(59,130,246,0.1)]"
-      >
-        <video 
-          src= {videoDevFest}
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          className="w-full h-auto block"
-        />
-        <div className="absolute bottom-4 left-4 px-2 py-1 bg-blue-600 rounded font-mono text-[7px] text-white uppercase tracking-widest">
-          Live_Session_REC
-        </div>
-      </motion.div>
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            {/* VIDEO — solo per devfest-passport */}
+            {isDevFest && (
+              <motion.div 
+                {...fadeInUp}
+                className="relative break-inside-avoid rounded-2xl overflow-hidden border border-blue-500/30 bg-blue-500/5 shadow-[0_0_30px_rgba(59,130,246,0.1)]"
+              >
+                <video 
+                  src={videoDevFest}
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-auto block"
+                />
+                <div className="absolute bottom-4 left-4 px-2 py-1 bg-blue-600 rounded font-mono text-[7px] text-white uppercase tracking-widest">
+                  Live_Session_REC
+                </div>
+              </motion.div>
+            )}
 
-      {/* SCREENSHOTS */}
-      {project.gallery.map((img, idx) => (
-        <motion.div 
-          key={idx} 
-          {...fadeInUp}
-          className="relative group break-inside-avoid rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl"
-        >
-          <img 
-            src={img} 
-            alt={`Passport Detail ${idx}`} 
-            className="w-full h-auto block object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-          />
-          <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-          <div className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded font-mono text-[7px] text-white/50 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
-            Ref_IMG_{idx + 1}
+            {/* SCREENSHOTS */}
+            {project.gallery.map((img, idx) => (
+              <motion.div 
+                key={idx} 
+                {...fadeInUp}
+                className="relative group break-inside-avoid rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl"
+              >
+                <img 
+                  src={img} 
+                  alt={`Gallery detail ${idx + 1}`} 
+                  className="w-full h-auto block object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                <div className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded font-mono text-[7px] text-white/50 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
+                  Ref_IMG_{idx + 1}
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-      ))}
-    </div>
-  </section>
-)}
+        </section>
+      )}
 
-      {/* 05. DEEP DIVE & DISCLAIMER */}
+      {/* 06. DEEP DIVE & DISCLAIMER */}
       <section className="py-32 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
          <motion.div {...fadeInUp} className="text-center mb-20 space-y-4">
             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter italic">Dev_Deep_Dive</h2>
@@ -305,19 +364,43 @@ export default function CaseStudy({ project }: { project: Project }) {
               <p className="text-white/40 text-sm leading-relaxed italic">{project.fullDescription}</p>
             </div>
 
-            <div className="md:col-span-2 rounded-[2.5rem] bg-linear-to-br from-blue-500/10 to-transparent border border-blue-500/20 p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+            <div className="md:col-span-2 rounded-[2.5rem] bg-linear-to-br from-blue-500/10 to-transparent border border-blue-500/20 p-10 flex flex-col gap-8 shadow-2xl relative overflow-hidden">
+              
+              {/* Label + Quote */}
               <div className="space-y-4 relative z-10">
                 <span className="font-mono text-[9px] uppercase tracking-[0.3em] py-1 px-3 border border-blue-500/30 rounded-full text-blue-400">
                   Environment: {getPlatformLabel()}
                 </span>
-                <p className="text-2xl md:text-4xl font-bold text-white/90 italic tracking-tighter">
-                  Ogni linea di codice è stata scritta per massimizzare le performance su {isMobile ? 'iOS e Android' : 'browser moderni'}.
+                <p className="text-2xl md:text-3xl font-bold text-white/90 italic tracking-tighter leading-tight">
+                  {technicalQuote}
                 </p>
               </div>
 
-              {/* SAFE DISCLAIMER: Appare solo se c'è un'agenzia */}
+              {/* Features pills */}
+              <div className="flex flex-wrap gap-2 relative z-10">
+                {logicFeatures.map((feat) => (
+                  <span
+                    key={feat}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full font-mono text-[9px] uppercase tracking-widest text-blue-300/70"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-blue-400 inline-block" />
+                    {feat}
+                  </span>
+                ))}
+              </div>
+
+              {/* Performance metric */}
+              <div className="relative z-10 p-6 rounded-2xl bg-[#030014]/60 border border-white/5 flex items-center justify-between gap-6">
+                <div>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.4em] text-white/30 mb-1">Performance_Impact</p>
+                  <p className="text-2xl font-bold tracking-tighter" style={{ color: config.accent }}>{project.performance}</p>
+                </div>
+                <CpuIcon size={40} className="text-white/5" />
+              </div>
+
+              {/* SAFE DISCLAIMER — solo se c'è un'agenzia */}
               {project.agency && (
-                <div className="mt-8 p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex items-start gap-4">
+                <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex items-start gap-4 relative z-10">
                   <ShieldCheckIcon size={24} className="text-blue-400 shrink-0" />
                   <p className="text-[10px] font-mono leading-relaxed text-blue-400/60 uppercase tracking-wider">
                     Privacy_Protocol: Project developed in collaboration with {project.agency}. 
@@ -327,7 +410,8 @@ export default function CaseStudy({ project }: { project: Project }) {
                 </div>
               )}
 
-              <div className="flex flex-wrap gap-3 mt-8 relative z-10">
+              {/* Tech tags */}
+              <div className="flex flex-wrap gap-3 relative z-10">
                 {project.tech.map(t => (
                   <span key={t} className="text-[10px] font-mono p-2 bg-[#030014] border border-white/5 text-white/40 uppercase">#{t}</span>
                 ))}
